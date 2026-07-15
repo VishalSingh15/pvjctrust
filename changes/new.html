@@ -1,0 +1,111 @@
+<div id="donate" class="bg-yellow-50 p-8 rounded-2xl border border-yellow-100">
+
+              <h4 class="text-2xl font-bold text-slate-900 mb-4">Direct Bank Transfer</h4>
+
+              <p class="text-slate-600 mb-6 text-sm">
+                You can make a direct donation to our bank account. All donations are tax-exempt under section 80G.
+              </p>
+
+              <!-- Bank Details -->
+              <div class="bg-white p-4 rounded-lg border border-yellow-200 space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Account Name:</span>
+                  <span class="font-semibold text-slate-900 text-right">Pratham Vijay Janseva Trust</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Bank Name:</span>
+                  <span class="font-semibold text-slate-900 text-right">State Bank of India</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Account No:</span>
+                  <span class="font-semibold text-slate-900 text-right">123456789012</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">IFSC Code:</span>
+                  <span class="font-semibold text-slate-900 text-right">SBIN0001234</span>
+                </div>
+              </div>
+
+              <!-- QR Code -->
+              <div class="mt-6 text-center">
+                <div class="inline-block p-2 bg-white rounded-xl border border-slate-200 shadow-sm">
+                  <div class="w-32 h-32 bg-slate-100 flex items-center justify-center rounded-lg">
+                    <span class="text-xs text-slate-400 font-medium">UPI QR Code</span>
+                  </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">Scan to donate via UPI</p>
+              </div>
+
+              <!-- IMPORTANT NOTE -->
+              <p class="text-sm text-slate-700 mt-6 text-center font-medium">
+                After completing your donation, please fill the form below to receive your receipt & 80G certificate.
+              </p>
+
+              <!-- DONOR FORM -->
+              <form class="mt-6 bg-white p-5 rounded-xl border border-yellow-200 space-y-4">
+
+                <h5 class="text-lg font-semibold text-slate-900">Donation Confirmation</h5>
+
+                <!-- Name -->
+                <div>
+                  <label class="text-sm text-slate-600">Full Name *</label>
+                  <input type="text" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label class="text-sm text-slate-600">Email Address *</label>
+                  <input type="email" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label class="text-sm text-slate-600">Phone Number *</label>
+                  <input type="tel" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+
+                <!-- Amount -->
+                <div>
+                  <label class="text-sm text-slate-600">Donation Amount (₹) *</label>
+                  <input type="number" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+
+                <!-- Payment Method -->
+                <div>
+                  <label class="text-sm text-slate-600">Payment Method *</label>
+                  <select required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                    <option value="">Select</option>
+                    <option>UPI</option>
+                    <option>Bank Transfer</option>
+                  </select>
+                </div>
+
+                <!-- Transaction ID -->
+                <div>
+                  <label class="text-sm text-slate-600">Transaction ID / UTR Number *</label>
+                  <input type="text" required
+                    class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none">
+                </div>
+
+                <!-- Confirmation Checkbox -->
+                <div class="flex items-start gap-2">
+                  <input type="checkbox" required class="mt-1">
+                  <span class="text-xs text-slate-600">
+                    I confirm that I have successfully completed the donation.
+                  </span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                  class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg font-semibold transition">
+                  I Have Donated
+                </button>
+
+              </form>
+
+            </div>

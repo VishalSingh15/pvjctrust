@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery - Pratham Vijay Janseva Charitable Trust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-slate-200 py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm flex justify-between items-center relative z-50">
+      <div class="hidden sm:flex items-center gap-6">
+        <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-400"></i> +91 98765 43210</span>
+        <span class="flex items-center gap-2"><i class="fa-solid fa-envelope text-emerald-400"></i> contact@pvjtrust.org</span>
+      </div>
+      <div class="flex items-center ml-auto gap-3">
+        <span class="hidden sm:inline font-medium text-slate-300">Translate:</span>
+        <div id="google_translate_element" class="min-h-[28px] flex items-center overflow-hidden rounded"></div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="w-full sticky top-0 z-50 transition-all duration-300 bg-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <div class="flex-shrink-0 flex items-center">
+          <a href="/index.html" class="flex items-center gap-2">
+            <!-- <i class="fa-solid fa-heart text-emerald-600 text-3xl"></i>
+            <span class="font-bold text-xl text-slate-800 hidden sm:block">Pratham Vijay Janseva</span>
+            <span class="font-bold text-xl text-slate-800 sm:hidden">PVJ Trust</span> -->
+            <img src="images/header-logo.png"></img>
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/index.html" class="text-slate-600 hover:text-emerald-600 font-medium transition-colors">Home</a>
+          <a href="/about.html" class="text-slate-600 hover:text-emerald-600 font-medium transition-colors">About Us</a>
+          <!-- Our Work Dropdown -->
+          <div class="relative group">
+            <a href="#"
+              class="text-slate-600 hover:text-emerald-600 font-medium transition-colors flex items-center gap-1">
+              Our Work
+              <i class="fa-solid fa-chevron-down text-sm"></i>
+            </a>
+
+            <!-- Dropdown Menu -->
+            <div
+              class="absolute left-0 mt-2 w-48 bg-white border border-slate-100 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+
+              <a href="/education.html"
+                class="block px-4 py-2 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600">Education</a>
+
+              <a href="/healthcare.html"
+                class="block px-4 py-2 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600">Healthcare</a>
+
+              <a href="/environment.html"
+                class="block px-4 py-2 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600">Environment</a>
+
+              <a href="/footstuffs.html"
+                class="block px-4 py-2 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600">Foodstuffs</a>
+
+            </div>
+          </div>
+          <a href="/gallery.html"
+            class="text-emerald-600 font-medium transition-colors border-b-2 border-emerald-600 pb-1">Gallery</a>
+          <a href="/contact.html"
+            class="text-slate-600 hover:text-emerald-600 font-medium transition-colors">Contact</a>
+          <a href="/donate.html"
+            class="bg-emerald-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-emerald-700 transition-colors shadow-sm">Donate
+            Now</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" class="text-slate-600 hover:text-emerald-600 focus:outline-none">
+            <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+            <i id="close-icon" class="fa-solid fa-xmark text-2xl hidden"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 w-full shadow-lg">
+      <!-- <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg mt-2"> -->
+
+      <div class="mobile-nav px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="/index.html"
+          class="mobile-link block px-3 py-2 text-base font-medium text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">Home</a>
+        <a href="/about.html"
+          class="mobile-link block px-3 py-2 text-base font-medium text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">About
+          Us</a>
+        <div>
+          <button id="work-btn"
+            class="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">
+            Our Work
+            <i id="work-icon" class="fa-solid fa-chevron-down text-sm transition-transform"></i>
+          </button>
+
+          <!-- Dropdown -->
+          <div id="work-menu" class="hidden pl-4 space-y-1">
+            <a href="/education.html"
+              class="block px-3 py-2 text-sm text-slate-600 hover:text-emerald-600">Education</a>
+            <a href="/healthcare.html"
+              class="block px-3 py-2 text-sm text-slate-600 hover:text-emerald-600">Healthcare</a>
+            <a href="/environment.html"
+              class="block px-3 py-2 text-sm text-slate-600 hover:text-emerald-600">Environment</a>
+            <a href="/environment.html"
+              class="block px-3 py-2 text-sm text-slate-600 hover:text-emerald-600">Foodstuffs</a>
+          </div>
+        </div>
+        <a href="/gallery.html"
+          class="mobile-link block px-3 py-2 text-base font-medium text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">Gallery</a>
+        <a href="/contact.html"
+          class="mobile-link block px-3 py-2 text-base font-medium text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-md">Contact</a>
+        <a href="/donate.html"
+          class="donate-btn mobile-link block px-3 py-2 text-base font-medium text-emerald-600 hover:bg-emerald-50 rounded-md">Donate
+          Now</a>
+      </div>
+    </div>
+  </nav>
+
+    <main>
+      <!-- Page Hero / Banner -->
+      <section class="relative h-64 sm:h-80 flex items-center justify-center">
+        <div class="absolute inset-0 z-0" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-position: center; background-size: cover;">
+          <div class="absolute inset-0 bg-slate-900/70"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8">
+          <h1 class="reveal text-4xl sm:text-5xl font-bold text-white mb-4">Our Story</h1>
+          <p class="reveal delay-200 text-lg text-emerald-100 max-w-2xl mx-auto">
+            A journey of compassion, dedication, and unwavering commitment to uplifting communities.
+          </p>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+<section class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold mb-6 text-center">Our Events Gallery</h2>
+
+  <!-- GRID -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+
+    <!-- IMAGE ITEM -->
+    <div class="cursor-pointer group">
+      <img src="https://picsum.photos/id/1011/500/400"
+           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+           onclick="openLightbox(this.src)">
+    </div>
+
+    <div class="cursor-pointer group">
+      <img src="https://picsum.photos/id/1015/500/400"
+           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+           onclick="openLightbox(this.src)">
+    </div>
+
+    <div class="cursor-pointer group">
+      <img src="https://picsum.photos/id/1016/500/400"
+           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+           onclick="openLightbox(this.src)">
+    </div>
+
+    <div class="cursor-pointer group">
+      <img src="https://picsum.photos/id/1025/500/400"
+           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+           onclick="openLightbox(this.src)">
+    </div>
+
+    <div class="cursor-pointer group">
+      <img src="https://picsum.photos/id/1025/500/400"
+           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+           onclick="openLightbox(this.src)">
+    </div>
+
+  </div>
+</section>
+
+      <!-- LIGHTBOX -->
+<div id="lightbox"
+     class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+
+  <!-- IMAGE -->
+  <img id="lightbox-img"
+       class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg">
+
+</div>
+    </main>
+
+    <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-8 mb-8">
+        <div class="col-span-1 md:col-span-2">
+          <img src="images/footer-logo.png"></img>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/index.html" class="hover:text-emerald-400 transition-colors">Home</a></li>
+            <li><a href="/about.html" class="hover:text-emerald-400 transition-colors">About Us</a></li>
+            <li><a href="/gallery.html" class="hover:text-emerald-400 transition-colors">Gallery</a></li>
+            <li><a href="/contact.html" class="hover:text-emerald-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Our Services</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/education.html" class="hover:text-emerald-400 transition-colors">Education</a></li>
+            <li><a href="/environment.html" class="hover:text-emerald-400 transition-colors">Environment</a></li>
+            <li><a href="/healthcare.html" class="hover:text-emerald-400 transition-colors">Healthcare</a></li>
+            <li><a href="/foodstuffs.html" class="hover:text-emerald-400 transition-colors">Foodstuffs</a></li>
+          </ul>
+        </div>
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <!-- <i class="fa-solid fa-heart text-emerald-500 text-2xl"></i> -->
+            <span class="font-bold text-xl text-white">Info</span>
+          </div>
+          <p class="text-slate-400 text-sm max-w-md mb-6">
+            Pratham Vijay Janseva Charitable Trust is dedicated to empowering lives and building a better future for the underprivileged through education, healthcare, and community support.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors"><i
+                class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors"><i
+                class="fa-brands fa-twitter"></i></a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-colors"><i
+                class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
+        <p>&copy; 2026 Pratham Vijay Janseva Charitable Trust. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/script.js"></script>
+  
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'
+    ,
+    includedLanguages: 'en,hi,mr', // only these languages
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(src) {
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    lightboxImg.src = src;
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+  }
+
+  // Click outside image to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target !== lightboxImg) {
+      closeLightbox();
+    }
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>
+
+
+  </body>
+</html>

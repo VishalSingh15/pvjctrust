@@ -1,0 +1,7 @@
+div#\:0\.targetLanguage {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    border-radius: 15px;
+}
+
