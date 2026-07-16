@@ -138,55 +138,55 @@
       </section>
 
       <!-- GALLERY -->
-<section class="max-w-7xl mx-auto px-4 py-10">
-  <h2 class="text-3xl font-bold mb-6 text-center">Our Events Gallery</h2>
+      <section class="max-w-7xl mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold mb-6 text-center text-slate-800">Our Events Gallery</h2>
 
-  <!-- GRID -->
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Tabs Navigation -->
+        <div class="flex justify-center mb-8">
+          <div class="inline-flex p-1 bg-slate-100 rounded-xl shadow-inner border border-slate-200">
+            <button id="tab-shivjayanti" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm" onclick="switchTab('shivjayanti')">
+              <i class="fa-solid fa-flag text-orange-500 mr-2 animate-pulse"></i>Chhatrapati Shivaji Maharaj Jayanti
+              <span class="block text-[10px] font-normal text-slate-500 mt-0.5">19 February 2026</span>
+            </button>
+            <button id="tab-other" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800" onclick="switchTab('other')">
+              <i class="fa-solid fa-hands-holding-child text-emerald-600 mr-2"></i>Other Activities
+              <span class="block text-[10px] font-normal text-slate-400 mt-0.5">General Gallery</span>
+            </button>
+          </div>
+        </div>
 
-    <!-- IMAGE ITEM -->
-    <div class="cursor-pointer group">
-      <img src="https://picsum.photos/id/1011/500/400"
-           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-           onclick="openLightbox(this.src)">
-    </div>
+        <!-- Filters Navigation (only shown for Shiv Jayanti) -->
+        <div id="media-filters" class="flex justify-center gap-3 mb-8">
+          <button id="filter-all" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition" onclick="filterMedia('all')">All Media</button>
+          <button id="filter-image" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('image')">Photos Only</button>
+          <button id="filter-video" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('video')">Videos Only</button>
+        </div>
 
-    <div class="cursor-pointer group">
-      <img src="https://picsum.photos/id/1015/500/400"
-           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-           onclick="openLightbox(this.src)">
-    </div>
+        <!-- GALLERY GRID -->
+        <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Dynamically populated via JS -->
+        </div>
 
-    <div class="cursor-pointer group">
-      <img src="https://picsum.photos/id/1016/500/400"
-           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-           onclick="openLightbox(this.src)">
-    </div>
-
-    <div class="cursor-pointer group">
-      <img src="https://picsum.photos/id/1025/500/400"
-           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-           onclick="openLightbox(this.src)">
-    </div>
-
-    <div class="cursor-pointer group">
-      <img src="https://picsum.photos/id/1025/500/400"
-           class="rounded-lg w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-           onclick="openLightbox(this.src)">
-    </div>
-
-  </div>
-</section>
+        <!-- Load More Container -->
+        <div id="load-more-container" class="flex justify-center mt-10 hidden">
+          <button id="load-more-btn" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition duration-200 transform hover:-translate-y-0.5" onclick="loadMore()">Load More Media</button>
+        </div>
+      </section>
 
       <!-- LIGHTBOX -->
-<div id="lightbox"
-     class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+      <div id="lightbox" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[100] backdrop-blur-md transition-all duration-300">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/80 hover:text-white text-4xl font-light hover:scale-110 transition duration-200 focus:outline-none z-[101]" aria-label="Close">&times;</button>
+        
+        <!-- Content Area -->
+        <div class="max-w-[95%] max-h-[90%] flex items-center justify-center relative">
+          <!-- IMAGE -->
+          <img id="lightbox-img" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl hidden object-contain">
 
-  <!-- IMAGE -->
-  <img id="lightbox-img"
-       class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg">
-
-</div>
+          <!-- VIDEO -->
+          <video id="lightbox-video" controls class="max-w-full max-h-[85vh] rounded-lg shadow-2xl hidden object-contain" src=""></video>
+        </div>
+      </div>
     </main>
 
     <!-- Footer -->
@@ -255,23 +255,248 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
+  // Chhatrapati Shivaji Maharaj Jayanti - Media lists
+  const shivJayantiImages = [
+    "WhatsApp Image 2026-07-15 at 11.23.15 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.05 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.06 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.06 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.10 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.14 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.16 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.17 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.17 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.19 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.20 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.22 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.24 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.26 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.27 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.29 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.31 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.32 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.35 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.41 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.42 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.44 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.47 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.48 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.52 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.55 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.56 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.58 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.28.59 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.05 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.06 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.07 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.08 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.10 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.13 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.14 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.16 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.17 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.21 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.24 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.25 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.27 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.30 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.29.32 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.33 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.33 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.34 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.35 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.37 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.37 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.39 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.39 PM (2).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.39 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.40 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.40 PM (2).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.40 PM.jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.41 PM (1).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.41 PM (2).jpeg",
+    "WhatsApp Image 2026-07-15 at 11.30.41 PM.jpeg",
+    "WhatsApp Image 2026-07-16 at 12.25.02 AM.jpeg",
+    "WhatsApp Image 2026-07-16 at 12.36.00 AM.jpeg"
+  ];
+
+  const shivJayantiVideos = [
+    "WhatsApp Video 2026-07-15 at 11.25.13 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.28.39 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.28.49 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.29.03 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.44 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.45 PM (1).mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.45 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.46 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.47 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.48 PM (1).mp4",
+    "WhatsApp Video 2026-07-15 at 11.30.48 PM.mp4",
+    "WhatsApp Video 2026-07-15 at 11.32.53 PM.mp4"
+  ];
+
+  // Map to media objects with encoded URLs
+  const shivJayantiMedia = [
+    ...shivJayantiVideos.map(name => ({ type: 'video', src: `images/live/events/shiv-jayanti/${encodeURIComponent(name)}` })),
+    ...shivJayantiImages.map(name => ({ type: 'image', src: `images/live/events/shiv-jayanti/${encodeURIComponent(name)}` }))
+  ];
+
+  const otherMedia = [
+    { type: 'image', src: 'https://picsum.photos/id/1011/500/400' },
+    { type: 'image', src: 'https://picsum.photos/id/1015/500/400' },
+    { type: 'image', src: 'https://picsum.photos/id/1016/500/400' },
+    { type: 'image', src: 'https://picsum.photos/id/1025/500/400' },
+    { type: 'image', src: 'https://picsum.photos/id/1025/500/400' }
+  ];
+
+  let currentTab = 'shivjayanti';
+  let currentFilter = 'all';
+  let visibleCount = 16;
+  const itemsPerPage = 16;
+
+  // DOM Elements
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxVideo = document.getElementById('lightbox-video');
+  const galleryGrid = document.getElementById('gallery-grid');
+  const mediaFilters = document.getElementById('media-filters');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  const tabShiv = document.getElementById('tab-shivjayanti');
+  const tabOther = document.getElementById('tab-other');
 
-  function openLightbox(src) {
+  function renderGallery() {
+    let list = [];
+    if (currentTab === 'other') {
+      list = otherMedia;
+    } else {
+      if (currentFilter === 'all') {
+        list = shivJayantiMedia;
+      } else {
+        list = shivJayantiMedia.filter(item => item.type === currentFilter);
+      }
+    }
+
+    const sliced = list.slice(0, visibleCount);
+    galleryGrid.innerHTML = '';
+
+    sliced.forEach(item => {
+      const card = document.createElement('div');
+      
+      if (item.type === 'video') {
+        card.className = "relative cursor-pointer group rounded-xl overflow-hidden h-48 bg-slate-950 border border-slate-900 shadow-md flex items-center justify-center";
+        card.onclick = () => openLightbox(item.src, 'video');
+        card.innerHTML = `
+          <video class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition duration-300" preload="metadata" src="${item.src}"></video>
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition duration-300"></div>
+          <div class="relative z-10 w-12 h-12 rounded-full bg-emerald-600/95 text-white flex items-center justify-center shadow-lg group-hover:bg-emerald-500 group-hover:scale-110 transition duration-300">
+            <i class="fa-solid fa-play text-lg ml-1"></i>
+          </div>
+          <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-semibold text-white flex items-center gap-1">
+            <i class="fa-solid fa-video text-[9px]"></i> VIDEO
+          </div>
+        `;
+      } else {
+        card.className = "cursor-pointer group relative overflow-hidden rounded-xl shadow-md border border-slate-100 bg-white h-48";
+        card.onclick = () => openLightbox(item.src, 'image');
+        card.innerHTML = `
+          <img src="${item.src}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery photo">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300"></div>
+        `;
+      }
+      
+      galleryGrid.appendChild(card);
+    });
+
+    if (sliced.length < list.length) {
+      loadMoreContainer.classList.remove('hidden');
+    } else {
+      loadMoreContainer.classList.add('hidden');
+    }
+  }
+
+  function switchTab(tab) {
+    currentTab = tab;
+    visibleCount = itemsPerPage;
+    currentFilter = 'all';
+
+    // Reset active filters styling
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition";
+    });
+    const defaultFilterBtn = document.getElementById('filter-all');
+    if (defaultFilterBtn) {
+      defaultFilterBtn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition";
+    }
+
+    if (tab === 'shivjayanti') {
+      tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
+      tabOther.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+      mediaFilters.classList.remove('hidden');
+      mediaFilters.classList.add('flex');
+    } else {
+      tabOther.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
+      tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+      mediaFilters.classList.remove('flex');
+      mediaFilters.classList.add('hidden');
+    }
+
+    renderGallery();
+  }
+
+  function filterMedia(filter) {
+    currentFilter = filter;
+    visibleCount = itemsPerPage;
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition";
+    });
+
+    const activeBtn = document.getElementById(`filter-${filter}`);
+    if (activeBtn) {
+      activeBtn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition";
+    }
+
+    renderGallery();
+  }
+
+  function loadMore() {
+    visibleCount += itemsPerPage;
+    renderGallery();
+  }
+
+  function openLightbox(src, type) {
     lightbox.classList.remove('hidden');
     lightbox.classList.add('flex');
-    lightboxImg.src = src;
+    document.body.style.overflow = 'hidden'; // Disable page scrolling
+
+    if (type === 'video') {
+      lightboxImg.classList.add('hidden');
+      lightboxVideo.classList.remove('hidden');
+      lightboxVideo.src = src;
+      lightboxVideo.play().catch(e => console.log("Autoplay blocked or video error:", e));
+    } else {
+      lightboxVideo.classList.add('hidden');
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightboxImg.classList.remove('hidden');
+      lightboxImg.src = src;
+    }
   }
 
   function closeLightbox() {
     lightbox.classList.add('hidden');
     lightbox.classList.remove('flex');
+    document.body.style.overflow = ''; // Restore page scrolling
+    
+    // Stop video playback and clear source
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+    lightboxImg.src = '';
   }
 
-  // Click outside image to close
+  // Click outside to close
   lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) {
+    if (e.target === lightbox || e.target.tagName === 'BUTTON') {
       closeLightbox();
     }
   });
@@ -281,6 +506,11 @@ function googleTranslateElementInit() {
     if (e.key === 'Escape') {
       closeLightbox();
     }
+  });
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', () => {
+    renderGallery();
   });
 </script>
 
