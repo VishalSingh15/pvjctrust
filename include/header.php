@@ -14,9 +14,8 @@
   <div
     class="bg-slate-900 text-slate-200 py-2 px-4 sm:px-6 lg:px-8 text-xs sm:text-sm flex justify-between items-center relative z-50">
     <div class="hidden sm:flex items-center gap-6">
-      <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-400"></i> +91 98765 43210</span>
-      <span class="flex items-center gap-2"><i class="fa-solid fa-envelope text-emerald-400"></i>
-        contact@pvjtrust.org</span>
+      <a href="tel:+919136974979" class="flex items-center gap-2 hover:text-emerald-400 transition-colors"><i class="fa-solid fa-phone text-emerald-400"></i> +91 91369 74979</a>
+      <a href="mailto:pvjctrust@gmail.com" class="flex items-center gap-2 hover:text-emerald-400 transition-colors"><i class="fa-solid fa-envelope text-emerald-400"></i> pvjctrust@gmail.com</a>
     </div>
     <div class="flex items-center ml-auto gap-3">
       <!-- <span class="hidden sm:inline font-medium text-slate-300">Translate:</span> -->
