@@ -2,7 +2,9 @@ import cors from 'cors';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
 import express from 'express';
+import fs from 'fs';
 import nodemailer from 'nodemailer';
+import path from 'path';
 import PDFDocument from 'pdfkit';
 import Razorpay from 'razorpay';
 // import { createServer as createViteServer } from 'vite';
@@ -198,7 +200,44 @@ app.post('/api/verify-payment', async (req, res) => {
 //   });
 // }
 
-// startServer();
+// API to dynamically scan and fetch Shiv Jayanti media
+app.get('/api/gallery/shiv-jayanti', (req, res) => {
+  const baseDir = path.join(process.cwd(), 'images', 'live', 'events', 'shiv-jayanti');
+  const subfolders = [
+    { folder: 'haldi kumkum', key: 'haldi kumkum' },
+    { folder: 'awards', key: 'awards' },
+    { folder: 'social message', key: 'social message' },
+    { folder: 'games & activities', key: 'games & activities' },
+    { folder: 'food distribution', key: 'food distribution' }
+  ];
+  
+  const mediaList: { category: string; type: 'image' | 'video'; src: string; name: string }[] = [];
+
+  try {
+    subfolders.forEach(({ folder, key }) => {
+      const folderPath = path.join(baseDir, folder);
+      if (fs.existsSync(folderPath)) {
+        const files = fs.readdirSync(folderPath);
+        files.forEach(file => {
+          const ext = path.extname(file).toLowerCase();
+          if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.webm', '.ogg'].includes(ext)) {
+            const type = (ext === '.mp4' || ext === '.webm' || ext === '.ogg') ? 'video' : 'image';
+            mediaList.push({
+              category: key,
+              type,
+              src: `images/live/events/shiv-jayanti/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`,
+              name: file
+            });
+          }
+        });
+      }
+    });
+    res.json(mediaList);
+  } catch (error) {
+    console.error('Error reading gallery files:', error);
+    res.status(500).json({ error: 'Failed to read gallery files' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

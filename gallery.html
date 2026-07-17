@@ -156,10 +156,13 @@
         </div>
 
         <!-- Filters Navigation (only shown for Shiv Jayanti) -->
-        <div id="media-filters" class="flex justify-center gap-3 mb-8">
-          <button id="filter-all" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition" onclick="filterMedia('all')">All Media</button>
-          <button id="filter-image" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('image')">Photos Only</button>
-          <button id="filter-video" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('video')">Videos Only</button>
+        <div id="media-filters" class="flex flex-wrap justify-center gap-3 mb-8">
+          <button id="filter-all" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition" onclick="filterMedia('all')">All Activities</button>
+          <button id="filter-haldi-kumkum" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('haldi-kumkum')">Haldi Kumkum</button>
+          <button id="filter-awards" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('awards')">Awards Distribution</button>
+          <button id="filter-social-message" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('social-message')">Social Messages</button>
+          <button id="filter-sports" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('sports')">Sports</button>
+          <button id="filter-food-distribution" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition" onclick="filterMedia('food-distribution')">Food Distribution</button>
         </div>
 
         <!-- GALLERY GRID -->
@@ -255,91 +258,145 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-  // Chhatrapati Shivaji Maharaj Jayanti - Media lists
-  const shivJayantiImages = [
-    "WhatsApp Image 2026-07-15 at 11.23.15 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.05 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.06 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.06 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.10 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.14 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.16 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.17 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.17 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.19 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.20 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.22 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.24 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.26 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.27 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.29 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.31 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.32 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.35 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.41 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.42 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.44 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.47 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.48 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.52 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.55 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.56 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.58 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.28.59 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.05 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.06 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.07 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.08 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.10 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.13 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.14 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.16 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.17 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.21 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.24 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.25 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.27 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.30 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.29.32 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.33 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.33 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.34 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.35 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.37 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.37 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.39 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.39 PM (2).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.39 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.40 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.40 PM (2).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.40 PM.jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.41 PM (1).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.41 PM (2).jpeg",
-    "WhatsApp Image 2026-07-15 at 11.30.41 PM.jpeg",
-    "WhatsApp Image 2026-07-16 at 12.25.02 AM.jpeg",
-    "WhatsApp Image 2026-07-16 at 12.36.00 AM.jpeg"
-  ];
+  // Chhatrapati Shivaji Maharaj Jayanti - Media lists grouped by activity subfolders
+  const shivJayantiMediaFiles = {
+    "haldi kumkum": {
+      images: [
+        "WhatsApp Image 2026-07-15 at 11.28.05 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.06 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.06 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.10 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.14 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.16 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.17 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.17 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.19 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.20 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.22 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.24 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.26 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.27 PM.jpeg"
+      ],
+      videos: [
+        "WhatsApp Video 2026-07-15 at 11.30.45 PM.mp4"
+      ]
+    },
+    "awards": {
+      images: [
+        "WhatsApp Image 2026-07-15 at 11.23.15 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.29 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.31 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.32 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.35 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.41 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.42 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.44 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.47 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.48 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.52 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.55 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.56 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.58 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.28.59 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.05 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.06 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.17 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.21 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.35 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.37 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.37 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.39 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.39 PM (2).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.39 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.40 PM.jpeg"
+      ],
+      videos: []
+    },
+    "social message": {
+      images: [
+        "WhatsApp Image 2026-07-15 at 11.29.07 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.08 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.10 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.13 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.14 PM.jpeg"
+      ],
+      videos: [
+        "WhatsApp Video 2026-07-15 at 11.30.47 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.32.53 PM.mp4"
+      ]
+    },
+    "games & activities": {
+      images: [
+        "WhatsApp Image 2026-07-15 at 11.29.16 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.24 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.25 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.27 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.30 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.29.32 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.33 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.33 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.34 PM.jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.40 PM (2).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.41 PM (1).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.41 PM (2).jpeg",
+        "WhatsApp Image 2026-07-15 at 11.30.41 PM.jpeg"
+      ],
+      videos: [
+        "WhatsApp Video 2026-07-15 at 11.25.13 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.28.39 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.28.49 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.29.03 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.30.44 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.30.45 PM (1).mp4",
+        "WhatsApp Video 2026-07-15 at 11.30.48 PM.mp4"
+      ]
+    },
+    "food distribution": {
+      images: [
+        "WhatsApp Image 2026-07-15 at 11.30.40 PM (1).jpeg"
+      ],
+      videos: [
+        "WhatsApp Video 2026-07-15 at 11.30.46 PM.mp4",
+        "WhatsApp Video 2026-07-15 at 11.30.48 PM (1).mp4"
+      ]
+    }
+  };
 
-  const shivJayantiVideos = [
-    "WhatsApp Video 2026-07-15 at 11.25.13 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.28.39 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.28.49 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.29.03 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.44 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.45 PM (1).mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.45 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.46 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.47 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.48 PM (1).mp4",
-    "WhatsApp Video 2026-07-15 at 11.30.48 PM.mp4",
-    "WhatsApp Video 2026-07-15 at 11.32.53 PM.mp4"
-  ];
+  // Compile static fallback list
+  const staticShivJayantiMedia = [];
+  Object.keys(shivJayantiMediaFiles).forEach(category => {
+    const categoryData = shivJayantiMediaFiles[category];
+    categoryData.images.forEach(name => {
+      staticShivJayantiMedia.push({
+        category: category,
+        type: 'image',
+        src: `images/live/events/shiv-jayanti/${encodeURIComponent(category)}/${encodeURIComponent(name)}`
+      });
+    });
+    categoryData.videos.forEach(name => {
+      staticShivJayantiMedia.push({
+        category: category,
+        type: 'video',
+        src: `images/live/events/shiv-jayanti/${encodeURIComponent(category)}/${encodeURIComponent(name)}`
+      });
+    });
+  });
 
-  // Map to media objects with encoded URLs
-  const shivJayantiMedia = [
-    ...shivJayantiVideos.map(name => ({ type: 'video', src: `images/live/events/shiv-jayanti/${encodeURIComponent(name)}` })),
-    ...shivJayantiImages.map(name => ({ type: 'image', src: `images/live/events/shiv-jayanti/${encodeURIComponent(name)}` }))
-  ];
+  let shivJayantiMedia = [];
+
+  async function fetchShivJayantiMedia() {
+    try {
+      const response = await fetch('/api/gallery/shiv-jayanti');
+      if (response.ok) {
+        shivJayantiMedia = await response.json();
+      } else {
+        throw new Error('API response not ok');
+      }
+    } catch (e) {
+      console.warn("Failed to fetch gallery media from backend API, falling back to static list. Error:", e);
+      shivJayantiMedia = staticShivJayantiMedia;
+    }
+  }
 
   const otherMedia = [
     { type: 'image', src: 'https://picsum.photos/id/1011/500/400' },
@@ -364,6 +421,14 @@ function googleTranslateElementInit() {
   const tabShiv = document.getElementById('tab-shivjayanti');
   const tabOther = document.getElementById('tab-other');
 
+  const filterToCategoryMap = {
+    'haldi-kumkum': 'haldi kumkum',
+    'awards': 'awards',
+    'social-message': 'social message',
+    'sports': 'games & activities',
+    'food-distribution': 'food distribution'
+  };
+
   function renderGallery() {
     let list = [];
     if (currentTab === 'other') {
@@ -372,7 +437,8 @@ function googleTranslateElementInit() {
       if (currentFilter === 'all') {
         list = shivJayantiMedia;
       } else {
-        list = shivJayantiMedia.filter(item => item.type === currentFilter);
+        const targetCategory = filterToCategoryMap[currentFilter];
+        list = shivJayantiMedia.filter(item => item.category === targetCategory);
       }
     }
 
@@ -509,7 +575,8 @@ function googleTranslateElementInit() {
   });
 
   // Initial render
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+    await fetchShivJayantiMedia();
     renderGallery();
   });
 </script>
