@@ -190,6 +190,92 @@ document.addEventListener('DOMContentLoaded', () => {
         initiateRazorpayCheckout();
       });
     }
+
+    // Document Preview Modal logic
+    const docModal = document.getElementById('doc-modal');
+    const docModalBackdrop = document.getElementById('doc-modal-backdrop');
+    const docModalContainer = document.getElementById('doc-modal-container');
+    const docModalTitle = document.getElementById('doc-modal-title');
+    const docModalClose = document.getElementById('doc-modal-close');
+    const docModalIframe = document.getElementById('doc-modal-iframe');
+    const docModalImg = document.getElementById('doc-modal-img');
+    const docModalLoader = document.getElementById('doc-modal-loader');
+
+    function openDocModal(title, url) {
+      if (!docModal) return;
+
+      docModalTitle.textContent = title;
+
+      // Hide preview content and show loader
+      docModalIframe.classList.add('hidden');
+      docModalImg.classList.add('hidden');
+      docModalLoader.classList.remove('hidden');
+
+      const isPdf = url.toLowerCase().endsWith('.pdf');
+      if (isPdf) {
+        docModalIframe.src = url;
+        docModalIframe.classList.remove('hidden');
+        docModalIframe.onload = () => {
+          docModalLoader.classList.add('hidden');
+        };
+      } else {
+        docModalImg.src = url;
+        docModalImg.classList.remove('hidden');
+        docModalImg.onload = () => {
+          docModalLoader.classList.add('hidden');
+        };
+      }
+
+      // Show modal structure
+      docModal.classList.remove('hidden');
+      void docModal.offsetHeight; // force repaint
+
+      // Transition styles
+      docModalBackdrop.classList.remove('opacity-0');
+      docModalBackdrop.classList.add('opacity-100');
+      docModalContainer.classList.remove('scale-95', 'opacity-0');
+      docModalContainer.classList.add('scale-100', 'opacity-100');
+
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeDocModal() {
+      if (!docModal) return;
+
+      // Animate out
+      docModalBackdrop.classList.remove('opacity-100');
+      docModalBackdrop.classList.add('opacity-0');
+      docModalContainer.classList.remove('scale-100', 'opacity-100');
+      docModalContainer.classList.add('scale-95', 'opacity-0');
+
+      document.body.classList.remove('overflow-hidden');
+
+      setTimeout(() => {
+        docModal.classList.add('hidden');
+        docModalIframe.src = '';
+        docModalImg.src = '';
+      }, 300);
+    }
+
+    // Attach event listener for buttons
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.view-doc-btn');
+      if (btn) {
+        e.preventDefault();
+        const title = btn.getAttribute('data-doc-title');
+        const url = btn.getAttribute('data-doc-url');
+        openDocModal(title, url);
+      }
+    });
+
+    if (docModalClose) docModalClose.addEventListener('click', closeDocModal);
+    if (docModalBackdrop) docModalBackdrop.addEventListener('click', closeDocModal);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && docModal && !docModal.classList.contains('hidden')) {
+        closeDocModal();
+      }
+    });
   }
 });
 
