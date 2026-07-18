@@ -200,30 +200,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const docModalIframe = document.getElementById('doc-modal-iframe');
     const docModalImg = document.getElementById('doc-modal-img');
     const docModalLoader = document.getElementById('doc-modal-loader');
+    const docModalExternal = document.getElementById('doc-modal-external');
+
+    let loaderTimeout = null;
 
     function openDocModal(title, url) {
       if (!docModal) return;
 
       docModalTitle.textContent = title;
+      if (docModalExternal) {
+        docModalExternal.href = url;
+      }
 
       // Hide preview content and show loader
       docModalIframe.classList.add('hidden');
       docModalImg.classList.add('hidden');
       docModalLoader.classList.remove('hidden');
 
+      if (loaderTimeout) {
+        clearTimeout(loaderTimeout);
+      }
+
+      // Safety fallback: hide loader after 1.5 seconds if onload fails
+      loaderTimeout = setTimeout(() => {
+        docModalLoader.classList.add('hidden');
+      }, 1500);
+
       const isPdf = url.toLowerCase().endsWith('.pdf');
       if (isPdf) {
+        // Set onload handler BEFORE src to avoid cached load race conditions
+        docModalIframe.onload = () => {
+          if (loaderTimeout) clearTimeout(loaderTimeout);
+          docModalLoader.classList.add('hidden');
+        };
         docModalIframe.src = url;
         docModalIframe.classList.remove('hidden');
-        docModalIframe.onload = () => {
+      } else {
+        // Set onload handler BEFORE src to avoid cached load race conditions
+        docModalImg.onload = () => {
+          if (loaderTimeout) clearTimeout(loaderTimeout);
           docModalLoader.classList.add('hidden');
         };
-      } else {
         docModalImg.src = url;
         docModalImg.classList.remove('hidden');
-        docModalImg.onload = () => {
-          docModalLoader.classList.add('hidden');
-        };
       }
 
       // Show modal structure
@@ -242,6 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeDocModal() {
       if (!docModal) return;
 
+      if (loaderTimeout) {
+        clearTimeout(loaderTimeout);
+      }
+
       // Animate out
       docModalBackdrop.classList.remove('opacity-100');
       docModalBackdrop.classList.add('opacity-0');
@@ -254,6 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
         docModal.classList.add('hidden');
         docModalIframe.src = '';
         docModalImg.src = '';
+        if (docModalExternal) {
+          docModalExternal.href = '#';
+        }
       }, 300);
     }
 
