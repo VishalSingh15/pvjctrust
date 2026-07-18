@@ -152,11 +152,11 @@
             <i class="fa-solid fa-flag text-orange-500 mr-2 animate-pulse"></i>Chhatrapati Shivaji Maharaj Jayanti
             <span class="block text-[10px] font-normal text-slate-500 mt-0.5">19 February 2026</span>
           </button>
-          <button id="tab-other"
+          <button id="tab-kemhospital"
             class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800"
-            onclick="switchTab('other')">
-            <i class="fa-solid fa-hands-holding-child text-emerald-600 mr-2"></i>Other Activities
-            <span class="block text-[10px] font-normal text-slate-400 mt-0.5">General Gallery</span>
+            onclick="switchTab('kemhospital')">
+            <i class="fa-solid fa-hospital text-emerald-600 mr-2"></i>KEM Hospital
+            <span class="block text-[10px] font-normal text-slate-400 mt-0.5">27 September 2025</span>
           </button>
         </div>
       </div>
@@ -428,13 +428,43 @@
       }
     }
 
-    const otherMedia = [
-      { type: 'image', src: 'https://picsum.photos/id/1011/500/400' },
-      { type: 'image', src: 'https://picsum.photos/id/1015/500/400' },
-      { type: 'image', src: 'https://picsum.photos/id/1016/500/400' },
-      { type: 'image', src: 'https://picsum.photos/id/1025/500/400' },
-      { type: 'image', src: 'https://picsum.photos/id/1025/500/400' }
+    const kemHospitalMediaFiles = [
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.41 AM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.42 AM (1).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.42 AM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.43 AM (1).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.43 AM (2).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.43 AM (3).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.43 AM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.44 AM (1).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.44 AM (2).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 1.00.44 AM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-07-17 at 12.08.32 AM.jpeg' },
+      { type: 'video', name: 'WhatsApp Video 2026-07-17 at 1.00.42 AM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-07-17 at 1.00.45 AM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-07-17 at 1.01.04 AM.mp4' }
     ];
+
+    const staticKemHospitalMedia = kemHospitalMediaFiles.map(item => ({
+      type: item.type,
+      src: `images/live/events/kem hospital/${encodeURIComponent(item.name)}`
+    }));
+
+    let kemHospitalMedia = [];
+
+    async function fetchKemHospitalMedia() {
+      try {
+        const response = await fetch('/api/gallery/kem-hospital');
+        if (response.ok) {
+          kemHospitalMedia = await response.json();
+        } else {
+          throw new Error('API response not ok');
+        }
+      } catch (e) {
+        console.warn("Failed to fetch gallery media from backend API, falling back to static list. Error:", e);
+        kemHospitalMedia = staticKemHospitalMedia;
+      }
+    }
 
     let currentTab = 'shivjayanti';
     let currentFilter = 'all';
@@ -449,7 +479,7 @@
     const mediaFilters = document.getElementById('media-filters');
     const loadMoreContainer = document.getElementById('load-more-container');
     const tabShiv = document.getElementById('tab-shivjayanti');
-    const tabOther = document.getElementById('tab-other');
+    const tabKemHospital = document.getElementById('tab-kemhospital');
 
     const filterToCategoryMap = {
       'haldi-kumkum': 'haldi kumkum',
@@ -461,8 +491,8 @@
 
     function renderGallery() {
       let list = [];
-      if (currentTab === 'other') {
-        list = otherMedia;
+      if (currentTab === 'kemhospital') {
+        list = kemHospitalMedia;
       } else {
         if (currentFilter === 'all') {
           list = shivJayantiMedia;
@@ -526,11 +556,11 @@
 
       if (tab === 'shivjayanti') {
         tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
-        tabOther.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+        tabKemHospital.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
         mediaFilters.classList.remove('hidden');
         mediaFilters.classList.add('flex');
       } else {
-        tabOther.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
+        tabKemHospital.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
         tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
         mediaFilters.classList.remove('flex');
         mediaFilters.classList.add('hidden');
@@ -606,7 +636,10 @@
 
     // Initial render
     document.addEventListener('DOMContentLoaded', async () => {
-      await fetchShivJayantiMedia();
+      await Promise.all([
+        fetchShivJayantiMedia(),
+        fetchKemHospitalMedia()
+      ]);
       renderGallery();
     });
   </script>

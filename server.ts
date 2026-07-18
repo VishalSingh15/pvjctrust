@@ -239,6 +239,33 @@ app.get('/api/gallery/shiv-jayanti', (req, res) => {
   }
 });
 
+// API to dynamically scan and fetch KEM Hospital media
+app.get('/api/gallery/kem-hospital', (req, res) => {
+  const baseDir = path.join(process.cwd(), 'images', 'live', 'events', 'kem hospital');
+  const mediaList: { type: 'image' | 'video'; src: string; name: string }[] = [];
+
+  try {
+    if (fs.existsSync(baseDir)) {
+      const files = fs.readdirSync(baseDir);
+      files.forEach(file => {
+        const ext = path.extname(file).toLowerCase();
+        if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.webm', '.ogg'].includes(ext)) {
+          const type = (ext === '.mp4' || ext === '.webm' || ext === '.ogg') ? 'video' : 'image';
+          mediaList.push({
+            type,
+            src: `images/live/events/kem hospital/${encodeURIComponent(file)}`,
+            name: file
+          });
+        }
+      });
+    }
+    res.json(mediaList);
+  } catch (error) {
+    console.error('Error reading KEM Hospital gallery files:', error);
+    res.status(500).json({ error: 'Failed to read KEM Hospital gallery files' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
