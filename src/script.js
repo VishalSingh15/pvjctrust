@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btn) {
         e.preventDefault();
         const title = btn.getAttribute('data-doc-title');
-        const url = btn.getAttribute('data-doc-url');
+        const url = btn.getAttribute('data-doc-url') || btn.getAttribute('href');
         openDocModal(title, url);
       }
     });
