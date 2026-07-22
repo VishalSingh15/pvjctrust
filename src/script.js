@@ -28,34 +28,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
 
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    menuIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
-  });
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (menuIcon) menuIcon.classList.toggle('hidden');
+      if (closeIcon) closeIcon.classList.toggle('hidden');
+    });
+  }
 
   // Close mobile menu on link click
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const mobileLinks = document.querySelectorAll('.mobile-link, #work-menu a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      menuIcon.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+      if (menuIcon) menuIcon.classList.remove('hidden');
+      if (closeIcon) closeIcon.classList.add('hidden');
     });
   });
 
-  // mobile menu dropdown
+  // Mobile menu dropdown ('Our Work')
+  const workBtn = document.getElementById('work-btn');
+  const workMenu = document.getElementById('work-menu');
+  const workIcon = document.getElementById('work-icon');
 
-  // const workBtn = document.getElementById("work-btn");
-  // const workMenu = document.getElementById("work-menu");
-  // const workIcon = document.getElementById("work-icon");
-
-  // workBtn.addEventListener("click", () => {
-  //   workMenu.classList.toggle("hidden");
-
-  //   // rotate icon
-  //   workIcon.classList.toggle("rotate-180");
-  // });
+  if (workBtn && workMenu) {
+    workBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      workMenu.classList.toggle('hidden');
+      if (workIcon) {
+        workIcon.classList.toggle('rotate-180');
+      }
+    });
+  }
 
   // Scroll Animations (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
