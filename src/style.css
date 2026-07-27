@@ -168,6 +168,20 @@ a.donate-btn {
     color: #fff;
     width:35%;
 }
+
+/* Prevent Image Dragging & Selection */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 /* @media(max-width:767px){
     nav#navbar {
     padding-bottom: 0px;

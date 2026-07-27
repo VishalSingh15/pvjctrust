@@ -438,3 +438,52 @@ async function initiateRazorpayCheckout() {
     }
   }
 }
+
+// ----------------------------------------------------
+// Sitewide Protections: Context Menu, Dragging & DevTools Shortcuts
+// ----------------------------------------------------
+
+// Disable right-click context menu
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  return false;
+});
+
+// Disable image dragging
+document.addEventListener('dragstart', (e) => {
+  if (e.target && e.target.tagName === 'IMG') {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// Disable common DevTools keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // F12 key
+  if (e.key === 'F12' || e.keyCode === 123) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl+Shift+I / Cmd+Alt+I (Inspect), Ctrl+Shift+J / Cmd+Alt+J (Console), Ctrl+Shift+C (Element Picker)
+  const isDevToolsCombo =
+    (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c', 'K', 'k'].includes(e.key)) ||
+    (e.metaKey && e.altKey && ['I', 'i', 'J', 'j', 'C', 'c', 'K', 'k'].includes(e.key));
+
+  if (isDevToolsCombo) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl+U / Cmd+U (View Source)
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl+S / Cmd+S (Save Page)
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) {
+    e.preventDefault();
+    return false;
+  }
+});

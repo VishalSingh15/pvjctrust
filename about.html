@@ -355,7 +355,7 @@
             </div>
             <a href="#"
               class="view-doc-btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-md"
-              data-doc-title="Registration Certificate" data-doc-url="images/live/docs/Registration Certificate.pdf">
+              data-doc-title="Registration Certificate" data-images="images/live/docs/registration.webp">
               View Document <i class="fa-solid fa-eye text-xs"></i>
             </a>
           </div>
@@ -375,7 +375,8 @@
             </div>
             <a href="#"
               class="view-doc-btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-md"
-              data-doc-title="80G Tax Exemption Certificate" data-doc-url="images/live/docs/80G Certificate.pdf">
+              data-doc-title="80G Tax Exemption Certificate"
+              data-images="images/live/docs/80g-1.webp,images/live/docs/80g-2.webp">
               View Document <i class="fa-solid fa-eye text-xs"></i>
             </a>
           </div>
@@ -395,7 +396,8 @@
             </div>
             <a href="#"
               class="view-doc-btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-md"
-              data-doc-title="12A Tax Exemption Certificate" data-doc-url="images/live/docs/12A Certifcates.pdf">
+              data-doc-title="12A Tax Exemption Certificate"
+              data-images="images/live/docs/12a-1.webp,images/live/docs/12a-2.webp">
               View Document <i class="fa-solid fa-eye text-xs"></i>
             </a>
           </div>
@@ -415,7 +417,7 @@
             </div>
             <a href="#"
               class="view-doc-btn mt-6 w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-md"
-              data-doc-title="NITI Aayog Darpan Certificate" data-doc-url="images/live/docs/NITI Aayog Darpan.pdf">
+              data-doc-title="NITI Aayog Darpan Certificate" data-images="images/live/docs/niti-aayog.webp">
               View Document <i class="fa-solid fa-eye text-xs"></i>
             </a>
           </div>
@@ -513,94 +515,110 @@
 
 
   <!-- Document Modal -->
-  <div id="documentModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div id="documentModal" class="fixed inset-0 hidden z-50 items-center justify-center bg-black/70 backdrop-blur">
 
-    <div class="bg-white rounded-2xl w-[95%] max-w-5xl h-[90vh] overflow-hidden shadow-2xl">
+    <div class="bg-white rounded-2xl w-[95%] max-w-4xl h-[90vh] flex flex-col overflow-hidden">
 
       <!-- Header -->
-      <div class="flex items-center justify-between px-6 py-4 border-b">
 
-        <h3 id="modalTitle" class="text-lg font-semibold text-slate-800">
+      <div class="flex justify-between items-center border-b px-6 py-4">
+
+        <h2 id="modalTitle" class="text-xl font-bold">
           Document
-        </h3>
+        </h2>
 
-        <button id="closeModal" class="text-2xl text-slate-500 hover:text-red-500">
+        <button id="closeModal" class="text-3xl text-gray-500 hover:text-red-500">
           &times;
         </button>
 
       </div>
 
-      <!-- Document -->
-      <iframe id="documentFrame" class="w-full h-[calc(90vh-70px)]" frameborder="0">
-      </iframe>
+      <!-- Images -->
+
+      <div id="documentContainer" class="flex-1 overflow-y-auto bg-gray-100 p-6 space-y-8">
+
+      </div>
 
     </div>
 
   </div>
 
   <script>
-
     const modal = document.getElementById("documentModal");
-    const iframe = document.getElementById("documentFrame");
+
     const modalTitle = document.getElementById("modalTitle");
+
+    const container = document.getElementById("documentContainer");
+
     const closeBtn = document.getElementById("closeModal");
 
-    document.querySelectorAll(".view-doc-btn").forEach(button => {
+    document.querySelectorAll(".view-doc-btn").forEach(btn => {
 
-      button.addEventListener("click", function (e) {
+      btn.addEventListener("click", function (e) {
 
         e.preventDefault();
 
-        const url = this.dataset.docUrl;
-        const title = this.dataset.docTitle;
+        modalTitle.textContent = this.dataset.docTitle;
 
-        modalTitle.textContent = title;
-        iframe.src = url;
+        container.innerHTML = "";
+
+        const images = this.dataset.images.split(",");
+
+        images.forEach(src => {
+
+          const img = document.createElement("img");
+
+          img.src = src.trim();
+
+          img.className = "document-image";
+
+          img.draggable = false;
+
+          img.loading = "lazy";
+
+          container.appendChild(img);
+
+        });
 
         modal.classList.remove("hidden");
+
         modal.classList.add("flex");
 
       });
 
     });
 
-    closeBtn.addEventListener("click", () => {
+    function closeModal() {
 
       modal.classList.add("hidden");
+
       modal.classList.remove("flex");
 
-      iframe.src = "";
+      container.innerHTML = "";
 
-    });
+    }
 
-    // Close when clicking outside
-    modal.addEventListener("click", function (e) {
+    closeBtn.onclick = closeModal;
+
+    modal.onclick = function (e) {
 
       if (e.target === modal) {
 
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-
-        iframe.src = "";
+        closeModal();
 
       }
 
-    });
+    }
 
-    // ESC key closes modal
     document.addEventListener("keydown", function (e) {
 
       if (e.key === "Escape") {
 
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-
-        iframe.src = "";
+        closeModal();
 
       }
 
     });
-
   </script>
 
 </body>
