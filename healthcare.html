@@ -145,60 +145,67 @@
             </div>
           </div>
 
-          <!-- Right Column: Donation Widget -->
-          <div class="lg:col-span-1">
-            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 sticky top-24 overflow-hidden">
-              <div class="bg-rose-600 p-6 text-center">
-                <h3 class="text-2xl font-bold text-white">Donate Now</h3>
-                <p class="text-rose-100 text-sm mt-1">Your support saves lives</p>
+          <!-- Info & Donation -->
+          <div class="lg:col-span-1 space-y-8">
+            <div>
+              <h4 class="text-2xl font-bold text-slate-900 mb-6">Contact Information</h4>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div
+                    class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-location-dot text-emerald-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-slate-900">Address</p>
+                    <p class="text-slate-600 text-sm">E- Wing , Room No. 202, 2nd Floor , Dr. Babasaheb Ambedkar Nagar,
+                      Elphinston Road, Prabhadevi, S.B. Marg, Delisle Road , Mumbai 400013 , Maharashtra</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-phone text-emerald-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-slate-900">Phone</p>
+                    <p class="text-slate-600 text-sm">+91 91369 74979</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-envelope text-emerald-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-slate-900">Email</p>
+                    <p class="text-slate-600 text-sm">pvjctrust@gmail.com</p>
+                  </div>
+                </div>
               </div>
-              
-              <form id="donation-form" class="p-6 space-y-6">
-                <!-- Hidden Cause Name -->
-                <input type="hidden" id="cause-name" value="Healthcare">
-                
-                <!-- Preset Amounts -->
-                <div>
-                  <label class="block text-sm font-semibold text-slate-700 mb-3">Select Amount</label>
-                  <div class="grid grid-cols-3 gap-3 mb-4">
-                    <button type="button" class="preset-amount-btn border border-slate-200 rounded-lg py-2 text-slate-700 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-colors" data-amount="1000">₹1000</button>
-                    <button type="button" class="preset-amount-btn border border-slate-200 rounded-lg py-2 text-slate-700 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-colors" data-amount="2500">₹2500</button>
-                    <button type="button" class="preset-amount-btn border border-slate-200 rounded-lg py-2 text-slate-700 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-colors" data-amount="5000">₹5000</button>
-                    <button type="button" class="preset-amount-btn border border-slate-200 rounded-lg py-2 text-slate-700 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-colors" data-amount="7500">₹7500</button>
-                    <button type="button" class="preset-amount-btn border border-slate-200 rounded-lg py-2 text-slate-700 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-colors" data-amount="10000">₹10000</button>
-                  </div>
-                  <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-medium">₹</span>
-                    <input type="number" id="custom-amount" class="w-full pl-8 pr-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow" placeholder="Custom Amount" min="100">
-                  </div>
-                </div>
+            </div>
 
-                <!-- Personal Info -->
-                <div class="space-y-4">
-                  <h4 class="text-sm font-semibold text-slate-700 border-b pb-2">Personal Details</h4>
-                  
-                  <div>
-                    <input type="text" id="donor-name" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow text-sm" placeholder="Full Name" required>
-                  </div>
-                  <div>
-                    <input type="email" id="donor-email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow text-sm" placeholder="Email Address" required>
-                  </div>
-                  <div>
-                    <input type="tel" id="donor-phone" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow text-sm" placeholder="Phone Number" required>
-                  </div>
-                  <div>
-                    <input type="text" id="donor-pan" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow text-sm" placeholder="PAN Number (For Tax Receipt)" required>
-                  </div>
-                  <div>
-                    <input type="text" id="donor-city" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow text-sm" placeholder="City" required>
-                  </div>
+            <div id="donate" class="bg-yellow-50 p-8 rounded-2xl border border-yellow-100">
+              <h4 class="text-2xl font-bold text-slate-900 mb-4">Direct Bank Transfer</h4>
+              <p class="text-slate-600 mb-6 text-sm">You can make a direct donation to our bank account. All donations
+                are tax-exempt under section 80G.</p>
+              <div class="bg-white p-4 rounded-lg border border-yellow-200 space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-slate-500">Account Name:</span><span
+                    class="font-semibold text-slate-900 text-right">Vijaykumar Kapildev Singh</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Bank Name:</span><span
+                    class="font-semibold text-slate-900 text-right">Saraswat co-op Bank</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Account No:</span><span
+                    class="font-semibold text-slate-900 text-right">006203100000965</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">IFSC Code:</span><span
+                    class="font-semibold text-slate-900 text-right">SRCB0000006</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Branch Name:</span><span
+                    class="font-semibold text-slate-900 text-right">Madhu Kendra Branch Dadar West</span></div>
+              </div>
+              <div class="mt-6 text-center">
+                <div class="inline-block p-2 bg-white rounded-xl border border-slate-200 shadow-sm">
+                  <img src="images/live/payment/qr.jpeg" alt="UPI QR Code" class="w-32 h-32 object-contain rounded-lg">
                 </div>
-
-                <button type="submit" class="w-full bg-emerald-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-                  Proceed to Donate <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                <p class="text-xs text-center text-slate-500 mt-4"><i class="fa-solid fa-lock text-emerald-600 mr-1"></i> Secure Payment Gateway</p>
-              </form>
+                <p class="text-xs text-slate-500 mt-2">Scan to donate via UPI</p>
+              </div>
             </div>
           </div>
         </div>
