@@ -148,12 +148,18 @@
 
       <!-- Tabs Navigation -->
       <div class="flex justify-center mb-8">
-        <div class="inline-flex p-1 bg-slate-100 rounded-xl shadow-inner border border-slate-200">
+        <div class="inline-flex p-1 bg-slate-100 rounded-xl shadow-inner border border-slate-200 flex-wrap justify-center gap-1">
           <button id="tab-shivjayanti"
-            class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm"
+            class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50"
             onclick="switchTab('shivjayanti')">
             <i class="fa-solid fa-flag text-orange-500 mr-2 animate-pulse"></i>Chhatrapati Shivaji Maharaj Jayanti
             <span class="block text-[10px] font-normal text-slate-500 mt-0.5">19 February 2026</span>
+          </button>
+          <button id="tab-kemhospital26"
+            class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800"
+            onclick="switchTab('kemhospital26')">
+            <i class="fa-solid fa-hospital text-emerald-600 mr-2"></i>KEM Hospital
+            <span class="block text-[10px] font-normal text-slate-400 mt-0.5">14 September 2026</span>
           </button>
           <button id="tab-kemhospital"
             class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800"
@@ -469,6 +475,53 @@
       }
     }
 
+    const kemHospital26MediaFiles = [
+      { type: 'image', name: 'WhatsApp Image 2026-09-20 at 6.35.59 PM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-09-20 at 6.36.17 PM.jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-09-20 at 6.36.24 PM (1).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-09-20 at 6.36.24 PM (2).jpeg' },
+      { type: 'image', name: 'WhatsApp Image 2026-09-20 at 6.36.24 PM.jpeg' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.00 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.16 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.20 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.23 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.26 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.27 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 6.36.28 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.21 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.22 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.23 PM (1).mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.23 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.24 PM (1).mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.24 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.25 PM (1).mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.25 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.26 PM (1).mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.26 PM.mp4' },
+      { type: 'video', name: 'WhatsApp Video 2026-09-20 at 7.32.27 PM.mp4' }
+    ];
+
+    const staticKemHospital26Media = kemHospital26MediaFiles.map(item => ({
+      type: item.type,
+      src: `images/live/events/kem hospital 26/${encodeURIComponent(item.name)}`
+    }));
+
+    let kemHospital26Media = [];
+
+    async function fetchKemHospital26Media() {
+      try {
+        const response = await fetch('/api/gallery/kem-hospital-26');
+        if (response.ok) {
+          kemHospital26Media = await response.json();
+        } else {
+          throw new Error('API response not ok');
+        }
+      } catch (e) {
+        console.warn("Failed to fetch gallery media from backend API, falling back to static list. Error:", e);
+        kemHospital26Media = staticKemHospital26Media;
+      }
+    }
+
     let currentTab = 'shivjayanti';
     let currentFilter = 'all';
     let visibleCount = 16;
@@ -482,6 +535,7 @@
     const mediaFilters = document.getElementById('media-filters');
     const loadMoreContainer = document.getElementById('load-more-container');
     const tabShiv = document.getElementById('tab-shivjayanti');
+    const tabKemHospital26 = document.getElementById('tab-kemhospital26');
     const tabKemHospital = document.getElementById('tab-kemhospital');
 
     const filterToCategoryMap = {
@@ -494,7 +548,9 @@
 
     function renderGallery() {
       let list = [];
-      if (currentTab === 'kemhospital') {
+      if (currentTab === 'kemhospital26') {
+        list = kemHospital26Media;
+      } else if (currentTab === 'kemhospital') {
         list = kemHospitalMedia;
       } else {
         if (currentFilter === 'all') {
@@ -557,14 +613,22 @@
         defaultFilterBtn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm transition";
       }
 
+      [tabShiv, tabKemHospital26, tabKemHospital].forEach(btn => {
+        if (btn) {
+          btn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+        }
+      });
+
       if (tab === 'shivjayanti') {
-        tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
-        tabKemHospital.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+        if (tabShiv) tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
         mediaFilters.classList.remove('hidden');
         mediaFilters.classList.add('flex');
-      } else {
-        tabKemHospital.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
-        tabShiv.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-800";
+      } else if (tab === 'kemhospital26') {
+        if (tabKemHospital26) tabKemHospital26.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
+        mediaFilters.classList.remove('flex');
+        mediaFilters.classList.add('hidden');
+      } else if (tab === 'kemhospital') {
+        if (tabKemHospital) tabKemHospital.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-slate-800 shadow-sm border border-slate-200/50";
         mediaFilters.classList.remove('flex');
         mediaFilters.classList.add('hidden');
       }
@@ -641,7 +705,8 @@
     document.addEventListener('DOMContentLoaded', async () => {
       await Promise.all([
         fetchShivJayantiMedia(),
-        fetchKemHospitalMedia()
+        fetchKemHospitalMedia(),
+        fetchKemHospital26Media()
       ]);
       renderGallery();
     });
